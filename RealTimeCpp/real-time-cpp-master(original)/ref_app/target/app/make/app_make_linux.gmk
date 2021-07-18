@@ -1,0 +1,281 @@
+#
+#  Copyright Christopher Kormanyos 2007 - 2019.
+#  Distributed under the Boost Software License,
+#  Version 1.0. (See accompanying file LICENSE_1_0.txt
+#  or copy at http://www.boost.org/LICENSE_1_0.txt)
+#
+
+# ------------------------------------------------------------------------------
+# 
+# Makefile
+#
+# Build file for the reference application using the GNU tools
+#
+# Based on GNU Make 3.81
+#
+# 07-April-2010
+#
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# paths
+# ------------------------------------------------------------------------------
+PATH_APP       = src
+PATH_TGT       = target/micros/$(TGT)
+PATH_APP_MAKE  = target/app/make
+PATH_TGT_MAKE  = $(PATH_TGT)/make
+PATH_BIN       = bin
+PATH_TMP       = tmp
+PATH_OBJ       = $(PATH_TMP)/obj
+PATH_SRC       = $(PATH_TMP)/src
+PATH_ERR       = $(PATH_TMP)/err
+
+
+# ------------------------------------------------------------------------------
+# include files
+# ------------------------------------------------------------------------------
+include $(PATH_APP_MAKE)/app_files.gmk      # Application file list
+include $(PATH_TGT_MAKE)/$(TGT)_files.gmk   # Target filelist
+include $(PATH_TGT_MAKE)/$(TGT)_flags.gmk   # Target compiler flags
+
+
+# ------------------------------------------------------------------------------
+# the application
+# ------------------------------------------------------------------------------
+APP = $(PATH_BIN)/ref_app
+
+# ------------------------------------------------------------------------------
+# object files
+# ------------------------------------------------------------------------------
+FILES_TMP   = $(FILES_CPP) $(FILES_TGT)
+FILES_O     = $(addprefix $(PATH_OBJ)/, $(notdir $(addsuffix .o, $(FILES_TMP))))
+
+
+# ------------------------------------------------------------------------------
+# linker definition file
+# ------------------------------------------------------------------------------
+LINKER_DEFINITION_FILE   = $(PATH_TGT_MAKE)/$(TGT).ld
+
+
+# ------------------------------------------------------------------------------
+# VPATH definition
+#
+# VPATH is required for the maker to find the C/C++/ASM-Source files.
+# Extract the directory/module names from the file list with the dir
+# command and remove the duplicated directory names with the sort command.
+# FILES_PRJ is listed first to make sure that the source files in the project
+# directory are searched first.
+# ------------------------------------------------------------------------------
+VPATH := $(sort $(dir $(FILES_TMP)))
+
+
+# ------------------------------------------------------------------------------
+# Development tools
+# ------------------------------------------------------------------------------
+ifeq ($(GCC_PREFIX),)
+AR        = ar
+AS        = g++
+CC        = g++
+CPPFILT   = c++filt
+NM        = nm
+OBJDUMP   = objdump
+OBJCOPY   = objcopy
+READELF   = readelf
+SIZE      = size
+else
+AR        = $(GCC_PREFIX)-ar
+AS        = $(GCC_PREFIX)-g++
+CC        = $(GCC_PREFIX)-g++
+CPPFILT   = $(GCC_PREFIX)-c++filt
+NM        = $(GCC_PREFIX)-nm
+OBJDUMP   = $(GCC_PREFIX)-objdump
+OBJCOPY   = $(GCC_PREFIX)-objcopy
+READELF   = $(GCC_PREFIX)-readelf
+SIZE      = $(GCC_PREFIX)-size
+endif
+
+ECHO      = echo
+MAKE      = make
+MKDIR     = mkdir
+RM        = rm
+SED       = sed
+
+
+# ------------------------------------------------------------------------------
+# Tool parameters
+# ------------------------------------------------------------------------------
+C_INCLUDES = $(TGT_INCLUDES)                    \
+             -I$(PATH_APP)                      \
+             -I$(PATH_APP)/mcal/$(TGT)
+
+GCCFLAGS    = $(TGT_CFLAGS)                     \
+              -g                                \
+              -Wall                             \
+              -Wextra                           \
+              -pedantic                         \
+              -Wmain                            \
+              -Wundef                           \
+              -Wsign-conversion                 \
+              -Wunused-parameter                \
+              -Wuninitialized                   \
+              -Wmissing-declarations            \
+              -Wshadow                          \
+              -Wunreachable-code                \
+              -Wswitch-default                  \
+              -Wswitch-enum                     \
+              -Wcast-align                      \
+              -Wmissing-include-dirs            \
+              -Winit-self                       \
+              -Wfloat-equal                     \
+              -Wdouble-promotion                \
+              -gdwarf-2                         \
+              -fno-exceptions                   \
+              -ffunction-sections               \
+              -fdata-sections
+
+CFLAGS      = $(GCCFLAGS)                       \
+              -Wunsuffixed-float-constants      \
+              -x c                              \
+              -std=c99
+
+CPPFLAGS    = $(GCCFLAGS)                       \
+              $(TGT_CPPFLAGS)                   \
+              -x c++                            \
+              -fno-rtti                         \
+              -fstrict-enums                    \
+              -fno-use-cxa-atexit               \
+              -fno-use-cxa-get-exception-ptr    \
+              -fno-nonansi-builtins             \
+              -fno-threadsafe-statics           \
+              -fno-enforce-eh-specs             \
+              -ftemplate-depth=32               \
+              -Wzero-as-null-pointer-constant
+
+AFLAGS      = $(GCCFLAGS)                       \
+              $(TGT_CFLAGS)                     \
+              $(TGT_AFLAGS)                     \
+              -x assembler
+
+LDFLAGS     = $(GCCFLAGS)                       \
+              $(TGT_LDFLAGS)                    \
+              -x none                           \
+              -Wl,--gc-sections                 \
+              -Wl,-Map,$(APP).map
+
+# ------------------------------------------------------------------------------
+# Main-Dependencies (app: all)
+# ------------------------------------------------------------------------------
+.PHONY: all
+all: clean_prj version $(APP)_flash.hex $(APP)_nm.txt $(APP).$(TGT_SUFFIX)
+
+
+# ------------------------------------------------------------------------------
+# Main-Dependencies (app: rebuild)
+# ------------------------------------------------------------------------------
+.PHONY: rebuild
+rebuild: clean_all all
+
+
+# ------------------------------------------------------------------------------
+# clean project
+# ------------------------------------------------------------------------------
+.PHONY: clean_prj
+clean_prj:
+	@-$(ECHO) +++ cleaning project
+	@-$(MKDIR) -p $(PATH_BIN)
+	@-$(MKDIR) -p $(PATH_OBJ)
+	@-$(MKDIR) -p $(PATH_ERR)
+	@-$(MKDIR) -p $(PATH_SRC)
+	@-$(RM) -r $(PATH_BIN)   > NUL  2> NUL
+	@-$(MKDIR) -p $(PATH_BIN)
+
+
+# ------------------------------------------------------------------------------
+# clean all
+# ------------------------------------------------------------------------------
+.PHONY: clean_all
+clean_all:
+	@-$(ECHO) +++ cleaning all
+	@-$(MKDIR) -p $(PATH_BIN)
+	@-$(MKDIR) -p $(PATH_OBJ)
+	@-$(MKDIR) -p $(PATH_ERR)
+	@-$(MKDIR) -p $(PATH_SRC)
+	@-$(RM) -r $(PATH_OBJ)   > NUL  2> NUL
+	@-$(RM) -r $(PATH_ERR)   > NUL  2> NUL
+	@-$(RM) -r $(PATH_SRC)   > NUL  2> NUL
+	@-$(RM) -r $(PATH_BIN)   > NUL  2> NUL
+	@-$(MKDIR) -p $(PATH_BIN)
+
+
+# ------------------------------------------------------------------------------
+# print the GNUmake version and the compiler version
+# ------------------------------------------------------------------------------
+.PHONY: version
+version:
+  # Print the GNU make version and the compiler version
+	@$(ECHO) +++ Print GNUmake version
+	@$(MAKE) --version
+	@$(ECHO)
+	@$(ECHO) +++ Print GCC version
+	@$(CC) -v
+	@$(ECHO)
+	@$(ECHO) +++ Print compiler include paths
+	@$(ECHO) $(C_INCLUDES)
+	@$(ECHO)
+	@$(ECHO) +++ Print compiler definitions
+	@$(ECHO) $(C_DEFINES)
+	@$(ECHO)
+
+
+# ------------------------------------------------------------------------------
+# link/locate application and generate an assembly list file
+# ------------------------------------------------------------------------------
+$(APP).$(TGT_SUFFIX) : $(LINKER_DEFINITION_FILE) $(FILES_O)
+	@-$(ECHO) +++ linking application to generate: $(APP).$(TGT_SUFFIX)
+	@-$(CC) $(LDFLAGS) $(FILES_O) -o $(APP).$(TGT_SUFFIX)
+	@-$(ECHO) +++ generating assembly list file: $(APP).lss
+	@-$(OBJDUMP) -h -S $(APP).$(TGT_SUFFIX) > $(APP).lss
+
+
+# ------------------------------------------------------------------------------
+# parse the object files to obtain symbol information, and create a size summary
+# ------------------------------------------------------------------------------
+$(APP)_nm.txt : $(APP).$(TGT_SUFFIX)
+	@-$(ECHO) +++ parsing symbols with nm to generate: $(APP)_nm.txt
+	@-$(NM) --numeric-sort --print-size $(APP).$(TGT_SUFFIX) > $(APP)_nm.txt
+	@-$(ECHO) +++ demangling symbols with c++filt to generate: $(APP)_cppfilt.txt
+	@-$(NM) --numeric-sort --print-size $(APP).$(TGT_SUFFIX) | $(CPPFILT) > $(APP)_cppfilt.txt
+	@-$(ECHO) +++ parsing symbols with readelf to generate: $(APP)_readelf.txt
+ifeq ($(TGT_SUFFIX),elf)
+	@-$(READELF) --syms $(APP).$(TGT_SUFFIX) > $(APP)_readelf.txt
+else
+	@-$(ECHO) +++ not available for: $(APP).$(TGT_SUFFIX).
+endif
+	@-$(ECHO) +++ creating size summary table with size to generate: $(APP)_size.txt
+	@-$(SIZE) -A -t $(APP).$(TGT_SUFFIX) > $(APP)_size.txt
+
+
+# ------------------------------------------------------------------------------
+# create hex mask
+# ------------------------------------------------------------------------------
+$(APP)_flash.hex : $(APP).$(TGT_SUFFIX)
+	@-$(ECHO) +++ creating hex module: $(APP).hex.
+	@-$(OBJCOPY) -O ihex $(APP).$(TGT_SUFFIX) $(APP).hex
+	@-$(OBJCOPY) -S -O binary $(APP).$(TGT_SUFFIX) $(APP).bin
+
+# ------------------------------------------------------------------------------
+# Dependencyfile include (build)
+#
+# Include all dependency (*.d) files generated previously from the compiler.
+# If the files do not exist then the includes will be ignored.
+# ------------------------------------------------------------------------------
+ifneq ($(MAKECMDGOALS),rebuild)
+-include $(subst .o,.d,$(FILES_O))       # for example tmp/obj/sys_start.d, tmp/obj/mcal_cpu.d, etc
+endif
+
+
+# ------------------------------------------------------------------------------
+# include the pattern build rules
+# ------------------------------------------------------------------------------
+include $(PATH_APP_MAKE)/app_rules.gmk

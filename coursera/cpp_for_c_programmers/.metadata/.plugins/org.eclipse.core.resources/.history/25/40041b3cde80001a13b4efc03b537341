@@ -1,0 +1,40 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Apr 17, 2020
+ *      Author: javi
+ */
+
+#include <iostream>
+
+using namespace std;
+
+class point{
+public:
+	point(){
+		x=0.0;
+		y=0.0;
+	}
+	double getx(){ return x;}
+	void setx(double val){ x = val;}
+	ostream& operator<< (ostream& out, const point& p){
+		out << '(' << p.x << ',' << p.y << ')';
+		return out;
+	}
+
+private:
+	double x,y;
+};
+
+//ostream& operator<< (ostream& out, const point& p){
+//	out << '(' << p.x << ',' << p.y << ')';
+//	return out;
+//}
+
+
+int main (){
+	point a;
+	cout << a << endl;
+	return 0;
+}
+

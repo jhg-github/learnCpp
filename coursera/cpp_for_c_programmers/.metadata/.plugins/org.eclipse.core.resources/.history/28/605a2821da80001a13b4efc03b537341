@@ -1,0 +1,18 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Apr 17, 2020
+ *      Author: javi
+ */
+
+#include <iostream>
+
+using namespace std;
+
+class point{
+public:
+private:
+	double x,y;
+	ostream& operator<< (ostream& out, const point& p);
+};
+

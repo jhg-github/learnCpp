@@ -1,0 +1,34 @@
+!SESSION 2020-01-20 19:28:02.734 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=11.0.5
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.cdt.core 1 0 2020-01-20 19:31:22.527
+!MESSAGE Indexed 'ch1' (0 sources, 0 headers) in 0.003 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:43.259
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:43.413
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../sysdeps/unix/sysv/linux/exit-thread.h
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:47.511
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../sysdeps/unix/sysv/linux/x86_64/init-first.c
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:47.569
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../csu/init-first.c
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:56.026
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:56.122
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../sysdeps/unix/sysv/linux/exit-thread.h
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:58.692
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../csu/libc-start.c
+
+!ENTRY org.eclipse.cdt.dsf.ui 2 0 2020-01-20 19:50:58.770
+!MESSAGE Unable to locate file: /build/glibc-OTsEL5/glibc-2.27/csu/../sysdeps/unix/sysv/linux/exit-thread.h

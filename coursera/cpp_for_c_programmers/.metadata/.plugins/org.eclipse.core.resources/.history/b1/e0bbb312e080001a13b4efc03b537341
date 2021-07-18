@@ -1,0 +1,52 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Apr 17, 2020
+ *      Author: javi
+ */
+
+#include <iostream>
+
+using namespace std;
+
+class point{
+public:
+	point(){
+		x=0.0;
+		y=0.0;
+	}
+	point(double x, double y){
+		this->x = x;
+		this->y = y;
+	}
+
+	double getx() const{ return x;}
+	void setx(double val){ x = val;}
+
+	double gety() const{ return y;}
+	void sety(double val){ y = val;}
+
+	friend ostream& operator<<(ostream &out, const point &p);
+
+private:
+	double x,y;
+};
+
+ostream& operator<<(ostream &out, const point &p){
+	out << '(' << p.x << ',' << p.y << ')';
+	return out;
+}
+
+point:: point& operator+(const point& p1){
+    const point& sum = point( p1.x + this->x,p1.y + this->y );
+    return sum;
+
+}
+
+
+int main (){
+	point a(1.7,2.3);
+	cout << a << endl;
+	return 0;
+}
+

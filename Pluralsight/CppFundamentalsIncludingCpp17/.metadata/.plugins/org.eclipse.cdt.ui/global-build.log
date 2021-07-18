@@ -1,0 +1,25 @@
+10:35:43 **** Incremental Build of configuration Debug for project CH5_ClassesAndObjects ****
+make all 
+Building file: ../src/CH5_ClassesAndObjects.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/CH5_ClassesAndObjects.d" -MT"src/CH5_ClassesAndObjects.o" -o "src/CH5_ClassesAndObjects.o" "../src/CH5_ClassesAndObjects.cpp"
+../src/CH5_ClassesAndObjects.cpp: In function ‘int main()’:
+../src/CH5_ClassesAndObjects.cpp:32:9: warning: variable ‘s’ set but not used [-Wunused-but-set-variable]
+  Status s = Pending;
+         ^
+../src/CH5_ClassesAndObjects.cpp:35:12: warning: variable ‘fe’ set but not used [-Wunused-but-set-variable]
+  FileError fe = FileError::notfound;
+            ^~
+../src/CH5_ClassesAndObjects.cpp:37:15: warning: variable ‘ne’ set but not used [-Wunused-but-set-variable]
+  NetworkError ne = NetworkError::disconnected;
+               ^~
+Finished building: ../src/CH5_ClassesAndObjects.cpp
+ 
+Building target: CH5_ClassesAndObjects
+Invoking: GCC C++ Linker
+g++  -o "CH5_ClassesAndObjects"  ./src/CH5_ClassesAndObjects.o ./src/Person.o ./src/Tweeter.o   
+Finished building target: CH5_ClassesAndObjects
+ 
+10:35:56 **** Incremental Build of configuration Debug for project CH5_ClassesAndObjects ****
+make all 
+make: Nothing to be done for 'all'.

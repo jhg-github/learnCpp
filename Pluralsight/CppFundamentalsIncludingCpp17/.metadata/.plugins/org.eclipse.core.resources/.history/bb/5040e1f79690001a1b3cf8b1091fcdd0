@@ -1,0 +1,16 @@
+/*
+ * Tweeter.cpp
+ *
+ *  Created on: May 7, 2020
+ *      Author: javi
+ */
+
+
+#include "Tweeter.h"
+#include <iostream>
+
+Tweeter::Tweeter(std::string first, std::string last, int arbitrary
+		std::string handle) :
+		Person(first, last, arbitrary), tweeterhandle(handle) {
+	cout << "constructing " << getName() << endl;
+}

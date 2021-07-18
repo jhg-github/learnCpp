@@ -1,0 +1,6 @@
+main.cpp:63:2:led::led(GPIO_TypeDef*, led::rcc_gpio_en_type, led::pin_number_type)	24	static
+main.cpp:76:7:void led::toggle() const	16	static
+main.cpp:81:7:void led::on() const	16	static
+main.cpp:98:5:int main()	16	static
+main.cpp:107:1:void __static_initialization_and_destruction_0(int, int)	16	static
+main.cpp:107:1:cpp)	8	static

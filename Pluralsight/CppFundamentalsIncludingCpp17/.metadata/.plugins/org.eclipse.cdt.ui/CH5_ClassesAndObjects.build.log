@@ -1,0 +1,6 @@
+10:35:56 **** Incremental Build of configuration Debug for project CH5_ClassesAndObjects ****
+make all 
+make: Nothing to be done for 'all'.
+
+10:35:57 Build Finished. 0 errors, 0 warnings. (took 1s.248ms)
+

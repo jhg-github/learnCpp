@@ -1,0 +1,40 @@
+17:15:40 **** Incremental Build of configuration Debug for project CH4_VariablesAndTypes ****
+make all 
+Building file: ../src/CH4_VariablesAndTypes.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -Wconversion -c -fmessage-length=0 -MMD -MP -MF"src/CH4_VariablesAndTypes.d" -MT"src/CH4_VariablesAndTypes.o" -o "src/CH4_VariablesAndTypes.o" "../src/CH4_VariablesAndTypes.cpp"
+../src/CH4_VariablesAndTypes.cpp: In function ‘int main()’:
+../src/CH4_VariablesAndTypes.cpp:42:7: warning: variable ‘a1’ set but not used [-Wunused-but-set-variable]
+  auto a1 = 1;
+       ^~
+../src/CH4_VariablesAndTypes.cpp:44:7: warning: unused variable ‘a3’ [-Wunused-variable]
+  auto a3 = 'c';
+       ^~
+../src/CH4_VariablesAndTypes.cpp:45:7: warning: unused variable ‘a4’ [-Wunused-variable]
+  auto a4 = "s";
+       ^~
+../src/CH4_VariablesAndTypes.cpp:46:7: warning: unused variable ‘a5’ [-Wunused-variable]
+  auto a5 = true;
+       ^~
+../src/CH4_VariablesAndTypes.cpp:47:7: warning: unused variable ‘a6’ [-Wunused-variable]
+  auto a6 = 3L;
+       ^~
+../src/CH4_VariablesAndTypes.cpp:48:7: warning: unused variable ‘a7’ [-Wunused-variable]
+  auto a7 = 1'000'000'000'000;
+       ^~
+../src/CH4_VariablesAndTypes.cpp:49:7: warning: unused variable ‘a8’ [-Wunused-variable]
+  auto a8 = 0xFF;  // 255
+       ^~
+../src/CH4_VariablesAndTypes.cpp:50:7: warning: unused variable ‘a9’ [-Wunused-variable]
+  auto a9 = 0b111; // 7
+       ^~
+Finished building: ../src/CH4_VariablesAndTypes.cpp
+ 
+Building target: CH4_VariablesAndTypes
+Invoking: GCC C++ Linker
+g++  -o "CH4_VariablesAndTypes"  ./src/CH4_VariablesAndTypes.o   
+Finished building target: CH4_VariablesAndTypes
+ 
+
+17:15:42 Build Finished. 0 errors, 8 warnings. (took 1s.902ms)
+

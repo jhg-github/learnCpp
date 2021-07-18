@@ -1,0 +1,26 @@
+/*
+ * Person.h
+ *
+ *  Created on: May 7, 2020
+ *      Author: javi
+ */
+
+#ifndef PERSON_H_
+#define PERSON_H_
+
+#include <string>
+
+class Person{
+private:
+	std::string firstname;
+	std::string lastname;
+	int arbitrarynumber;
+
+public:
+	std::string getName();
+};
+
+
+
+
+#endif /* PERSON_H_ */

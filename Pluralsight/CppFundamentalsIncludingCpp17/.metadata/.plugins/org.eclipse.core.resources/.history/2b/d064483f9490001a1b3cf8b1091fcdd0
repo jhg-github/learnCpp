@@ -1,0 +1,17 @@
+//============================================================================
+// Name        : CH5_ClassesAndObjects.cpp
+// Author      : javi
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include "Person.h"
+
+int main() {
+	Person p1("Javi","Hi",13);
+	Person p2;
+	std::string name = p1.getName();
+
+	return 0;
+}

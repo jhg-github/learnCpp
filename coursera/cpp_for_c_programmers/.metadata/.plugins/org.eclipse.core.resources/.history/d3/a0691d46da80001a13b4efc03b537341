@@ -1,0 +1,30 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Apr 17, 2020
+ *      Author: javi
+ */
+
+#include <iostream>
+
+using namespace std;
+
+class point{
+public:
+private:
+	double x,y;
+	ostream& operator<< (ostream& out, const point& p);
+};
+
+ostream& point::operator<< (ostream& out, const point& p){
+	out << '(' << p.x << ',' << p.y << ')'
+	return out;
+}
+
+
+int main (){
+	point a = {3.5,2.5};
+	cout << a << endl;
+	return 0;
+}
+

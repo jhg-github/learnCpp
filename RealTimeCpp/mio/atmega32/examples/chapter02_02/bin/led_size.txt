@@ -1,0 +1,11 @@
+bin/led.elf  :
+section        size      addr
+.isr_vectors      4         0
+.startup         96         4
+.text           148       100
+.data             0   8388864
+.bss              4   8388864
+.comment         17         0
+Total           269
+
+

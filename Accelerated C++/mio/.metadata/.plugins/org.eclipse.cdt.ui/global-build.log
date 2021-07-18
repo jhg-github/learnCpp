@@ -1,0 +1,46 @@
+19:37:52 **** Incremental Build of configuration Debug for project ch1 ****
+make all 
+Building file: ../ch1.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"ch1.d" -MT"ch1.o" -o "ch1.o" "../ch1.cpp"
+../ch1.cpp: In function ‘int main()’:
+../ch1.cpp:17:7: error: ‘out’ is not a member of ‘std’
+  std::out << "Hello, " << name << "!" << std::endl;
+       ^~~
+../ch1.cpp:17:7: note: suggested alternative: ‘cout’
+  std::out << "Hello, " << name << "!" << std::endl;
+       ^~~
+       cout
+subdir.mk:18: recipe for target 'ch1.o' failed
+make: *** [ch1.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+19:38:03 **** Incremental Build of configuration Debug for project ch1 ****
+make all 
+Building file: ../ch1.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"ch1.d" -MT"ch1.o" -o "ch1.o" "../ch1.cpp"
+Finished building: ../ch1.cpp
+ 
+Building target: ch1
+Invoking: GCC C++ Linker
+g++  -o "ch1"  ./ch1.o   
+Finished building target: ch1
+ 
+19:43:02 **** Incremental Build of configuration Debug for project ch1 ****
+make all 
+Building file: ../ch1.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"ch1.d" -MT"ch1.o" -o "ch1.o" "../ch1.cpp"
+Finished building: ../ch1.cpp
+ 
+Building target: ch1
+Invoking: GCC C++ Linker
+g++  -o "ch1"  ./ch1.o   
+Finished building target: ch1
+ 
+19:45:02 **** Incremental Build of configuration Debug for project ch1 ****
+make all 
+make: Nothing to be done for 'all'.
+19:49:44 **** Incremental Build of configuration Debug for project ch1 ****
+make all 
+make: Nothing to be done for 'all'.

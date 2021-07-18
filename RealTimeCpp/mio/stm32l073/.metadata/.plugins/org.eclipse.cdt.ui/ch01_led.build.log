@@ -1,0 +1,17 @@
+15:02:32 **** Incremental Build of configuration Debug for project ch01_led ****
+make -j4 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m0plus -std=gnu++14 -g3 -DSTM32 -DSTM32L073RZTx -DDEBUG -DSTM32L0 -c -I../Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-g++ -o "ch01_led.elf" @"objects.list"   -mcpu=cortex-m0plus -T"/home/javi/projects/learn_cpp/RealTimeCpp/mio/stm32l073/ch01_led/STM32L073RZTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ch01_led.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: ch01_led.elf
+ 
+arm-none-eabi-objdump -h -S  ch01_led.elf  > "ch01_led.list"
+arm-none-eabi-size   ch01_led.elf 
+   text	   data	    bss	    dec	    hex	filename
+    848	     12	   1576	   2436	    984	ch01_led.elf
+Finished building: default.size.stdout
+ 
+Finished building: ch01_led.list
+ 
+
+15:02:33 Build Finished. 0 errors, 0 warnings. (took 1s.236ms)
+
